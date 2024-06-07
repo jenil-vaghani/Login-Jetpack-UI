@@ -15,18 +15,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,6 +54,11 @@ class MainActivity : ComponentActivity() {
 @Preview
 fun MainScreen() {
     val context = LocalContext.current
+    val name by remember { mutableStateOf("") }
+    val email by remember { mutableStateOf("") }
+    val number by remember { mutableStateOf("") }
+    val password by remember { mutableStateOf("") }
+
 
     Surface(modifier = Modifier.fillMaxSize(), color = colorPrimary) {
         Column() {
@@ -92,22 +100,25 @@ fun MainScreen() {
                     verticalArrangement = Arrangement.SpaceEvenly
                 ) {
                     EditTextMy(
-                        label = "Enter your name", title = "Jenil Vaghani", icon = R.drawable.user
+                        label = "Enter your name",
+                        icon = R.drawable.user,
+                        remember { mutableStateOf(name) }
                     )
                     EditTextMy(
                         label = "Enter your email",
-                        title = "jenilvaghani0000000@gmail.com",
-                        icon = R.drawable.email
+                        icon = R.drawable.email,
+                        name = remember { mutableStateOf(number) }
                     )
                     EditTextMy(
                         label = "Enter your number",
-                        title = "+917024181548",
-                        icon = R.drawable.phone
+                        icon = R.drawable.phone,
+                        name = remember { mutableStateOf(email) }
                     )
                     EditTextMy(
-                        label = "Enter your password", title = "0000000", icon = R.drawable.lock
+                        label = "Enter your password",
+                        icon = R.drawable.lock,
+                        name = remember { mutableStateOf(password) }
                     )
-
                 }
             }
 
@@ -130,7 +141,7 @@ fun MainScreen() {
                             .background(colorTeal)
                             .clickable {
                                 Toast
-                                    .makeText(context, "Hey Sir", Toast.LENGTH_SHORT)
+                                    .makeText(context, name, Toast.LENGTH_SHORT)
                                     .show()
                             },
                         contentAlignment = Alignment.Center,
